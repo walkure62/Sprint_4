@@ -91,6 +91,16 @@ class TestBooksCollector:
         
         assert len(collector.get_books_for_children()) == 1
         
+       
+    @pytest.mark.parametrize('genre', ['Ужасы', 'Детективы'])  
+    def test_get_books_for_children_with_genre_age_rating_unsuccess(self, genre):
+        collector = BooksCollector()
+
+        collector.add_new_book('Гордость и предубеждение')
+        collector.set_book_genre('Гордость и предубеждение', genre)
+        
+        assert len(collector.get_books_for_children()) == 0
+        
         
     def test_add_book_in_favorites(self):
         collector = BooksCollector()
@@ -121,3 +131,4 @@ class TestBooksCollector:
         collector.add_book_in_favorites('Гордость и предубеждение')
         
         assert collector.favorites == collector.get_list_of_favorites_books()
+    
